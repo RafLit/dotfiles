@@ -15,8 +15,6 @@ set undoreload=10000
 
 set number
 
-
-
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -45,4 +43,15 @@ filetype plugin indent on
 """autocmd GuiEnter * silent NERDTree
 """autocmd VimEnter * silent NERDTree
 """autocmd TabEnter * silent exe MirrorNerdTreeIfOneWindow()
+let NERDTreeShowBookmarks=1
 
+:nnoremap <C-t> :NERDTreeToggle<CR>
+let g:NERDTreeNodeDelimiter = "\u00a0"
+:autocmd Filetype nerdtree nnoremap <buffer> b :Bookmark<CR>
+function! g:NERDTreeRevealBookmark(bookmark)
+  call nerdtree#ui_glue#revealBookmark(a:bookmark.name)
+  call NERDTreeRender()
+endfunction
+
+autocmd VimEnter * call NERDTreeAddKeyMap({ 'key': 'r', 'scope': 'Bookmark', 'callback': 'NERDTreeRevealBookmark' })
+"autocmd TabEnter * NERDTreeMirror
