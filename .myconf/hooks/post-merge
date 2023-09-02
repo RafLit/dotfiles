@@ -1,0 +1,3 @@
+if [[ -z "${CONFIG_INIT}" ]]; then
+  echo "[[ -f \"~/.mybashrc\" ]] && source \"~/.mybashrc\"" >> ~/.bashrc
+else
